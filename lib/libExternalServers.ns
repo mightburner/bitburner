@@ -2,7 +2,7 @@
 export function buildServerMap(ns) {
     var mServers = new Map();
     mServers.set(ns.getHostname(), serverData(ns, ns.getHostname()));
-    mapServer(ns, ns.getHostname(), 0, 20, );
+    mapServer(ns, ns.getHostname(), 0, 20, mServers);
 
     return mServers;
 }
