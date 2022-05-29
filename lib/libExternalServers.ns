@@ -35,8 +35,7 @@ export function serverData(ns, sShostname) {
 }
 
 export function refreshServers (ns, oMap) {
-    oMap.forEach((sHost, oState) => {
-	ns.print("Host: " + sHost);
-	ns.print("State: " + oState);
+    oMap.forEach((oState, sHost) => {
+	oMap.set(sHost, serverData(ns, sHost));
     });
 }
