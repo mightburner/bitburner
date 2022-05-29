@@ -21,15 +21,15 @@ export function mapServer(ns, sHostname, iDepth, iMaxDepth, oMap) {
     }
 }
 
-export function serverData(ns, sShostname) {
+export function serverData(ns, sHostname) {
     var server = {
-	"iPortsRequired" : ns.getServerNumPortsRequired(host),
-	"bHasRoot" : ns.hasRootAccess(host),
-	"iHackingRequired" : ns.getServerRequiredHackingLevel(host),
-	"iMaxMemory" : ns.getServerMaxRam(host),
-	"iUsedMemory" : ns.getServerUsedRam(host),
-	"iMaxMoney" : ns.getServerMaxMoney(host),
-	"iCurMoney" : ns.getServerMoneyAvailable(host),
+	"iPortsRequired" : ns.getServerNumPortsRequired(sHostname),
+	"bHasRoot" : ns.hasRootAccess(sHostname),
+	"iHackingRequired" : ns.getServerRequiredHackingLevel(sHostname),
+	"iMaxMemory" : ns.getServerMaxRam(sHostname),
+	"iUsedMemory" : ns.getServerUsedRam(sHostname),
+	"iMaxMoney" : ns.getServerMaxMoney(sHostname),
+	"iCurMoney" : ns.getServerMoneyAvailable(sHostname),
     };
     return server;
 }
