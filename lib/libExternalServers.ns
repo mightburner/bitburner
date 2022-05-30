@@ -30,6 +30,7 @@ export function serverData(ns, sHostname) {
 	"iMaxMoney" : ns.getServerMaxMoney(sHostname),
 	"iCurMoney" : ns.getServerMoneyAvailable(sHostname),
 	"fMinSecurityLevel" : ns.getServerMinSecurityLevel(sHostname),
+	"fCurSecurityLevel" : ns.getServerSecurityLevel(sHostname),
 	"fHackPercent" : 100 * ns.hackAnalyze(sHostname),
     };
     return server;
