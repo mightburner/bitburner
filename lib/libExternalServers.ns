@@ -29,7 +29,6 @@ export function serverData(ns, sHostname) {
 	"iUsedMemory" : ns.getServerUsedRam(sHostname),
 	"iMaxMoney" : ns.getServerMaxMoney(sHostname),
 	"iCurMoney" : ns.getServerMoneyAvailable(sHostname),
-	"iMaxMoney" : ns.getServerMaxMoney(sHostname),
 	"fMinSecurityLevel" : ns.getServerMinSecurityLevel(sHostname),
 	"fHackPercent" : 100 * ns.hackAnalyze(sHostname),
     };
