@@ -14,8 +14,7 @@ export function mapServer(ns, sHostname, iDepth, iMaxDepth, oMap) {
     for (var c = 0; c < newServers.length; c++) {
 	var newServer = newServers[c];
 	if (!oMap.has(newServer)) {
-	    var data = serverData();	    
-	    oMap.set(newServer, serverData());
+	    oMap.set(newServer, serverData(ns, newServer));
 	    mapServer(ns, newServer, iDepth + 1, iMaxDepth, oMap);
 	}
     }
@@ -30,6 +29,9 @@ export function serverData(ns, sHostname) {
 	"iUsedMemory" : ns.getServerUsedRam(sHostname),
 	"iMaxMoney" : ns.getServerMaxMoney(sHostname),
 	"iCurMoney" : ns.getServerMoneyAvailable(sHostname),
+	"iMaxMoney" : ns.getServerMaxMoney(sHostname),
+	"fMinSecurityLevel" : ns.getServerMinSecurityLevel(sHostname),
+	"fHackPercent" : 100 * ns.hackAnalyze(sHostname),
     };
     return server;
 }
