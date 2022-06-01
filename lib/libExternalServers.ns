@@ -1,0 +1,43 @@
+/** @param {NS} ns */
+export function buildServerMap(ns) {
+    var mServers = new Map();
+    mServers.set(ns.getHostname(), serverData(ns, ns.getHostname()));
+    mapServer(ns, ns.getHostname(), 0, 20, mServers);
+
+    return mServers;
+}
+
+export function mapServer(ns, sHostname, iDepth, iMaxDepth, oMap) {
+    if (iDepth >= iMaxDepth) { return; }
+
+    var newServers = ns.scan(sHostname);
+    for (var c = 0; c < newServers.length; c++) {
+	var newServer = newServers[c];
+	if (!oMap.has(newServer)) {
+	    oMap.set(newServer, serverData(ns, newServer));
+	    mapServer(ns, newServer, iDepth + 1, iMaxDepth, oMap);
+	}
+    }
+}
+
+export function serverData(ns, sHostname) {
+    var server = {
+	"iPortsRequired" : ns.getServerNumPortsRequired(sHostname),
+	"bHasRoot" : ns.hasRootAccess(sHostname),
+	"iHackingRequired" : ns.getServerRequiredHackingLevel(sHostname),
+	"iMaxMemory" : ns.getServerMaxRam(sHostname),
+	"iUsedMemory" : ns.getServerUsedRam(sHostname),
+	"iMaxMoney" : ns.getServerMaxMoney(sHostname),
+	"iCurMoney" : ns.getServerMoneyAvailable(sHostname),
+	"fMinSecurityLevel" : ns.getServerMinSecurityLevel(sHostname),
+	"fCurSecurityLevel" : ns.getServerSecurityLevel(sHostname),
+	"fHackPercent" : 100 * ns.hackAnalyze(sHostname),
+    };
+    return server;
+}
+
+export function refreshServers (ns, oMap) {
+    oMap.forEach((oState, sHost) => {
+	oMap.set(sHost, serverData(ns, sHost));
+    });
+}
