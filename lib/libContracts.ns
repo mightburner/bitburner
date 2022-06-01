@@ -33,3 +33,32 @@ function isValidOctet(test) {
 
 	return true;
 }
+
+export function CompressionIRLECompression(input) {
+	var curr = input.charAt(0);
+	var num = 1;
+	var result = [];
+	for (var c = 1; c < input.length; c++) {
+		if (input.charAt(c).localeCompare(curr) == 0) {
+			num += 1;
+			if (num == 9) {
+				result.push(num.toString() + curr);
+				num = 0;
+			}
+		}
+		else {
+			if (num > 0) {
+				result.push(num.toString() + curr);
+			}
+			
+			num = 1;
+			curr = input.charAt(c);
+		}
+		
+		if (c == input.length - 1) {
+			result.push(num.toString() + curr);
+		}
+	}
+	
+	return result.join("");
+}

@@ -12,6 +12,7 @@ export async function main(ns) {
 
 	var oHandlers = {
 		"Generate IP Addresses" : (input) => { return libContracts.GenerateIPAddresses(input); },
+		"Compression I: RLE Compression" : (input) => { return libContracts.CompressionIRLECompression(input); },
 	};
 	
 	while (true) {
@@ -40,6 +41,7 @@ export async function main(ns) {
 							}
 							else {
 								ns.print(" >> Failed attempt.");
+								return;
 							}
 						}
 					}
