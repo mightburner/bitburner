@@ -1,0 +1,35 @@
+export function GenerateIPAddresses(input) {
+	var aValidIPs = [];
+	for (var first = 1; first <= 3; first++) {
+		var oct1 = input.substring(0, first);
+		if (isValidOctet(oct1)) {
+			for (var second = 1; second <= 3; second++) {
+				var oct2 = input.substring(first, first + second);
+				if (isValidOctet(oct2)) {
+					for (var third = 1; third <= 3; third++) {
+						var oct3 = input.substring(first + second, first + second + third);
+						var oct4 = input.substring(first + second + third);
+
+						if (isValidOctet(oct3) && isValidOctet(oct4)) {
+							var aTestIP = [oct1, oct2, oct3, oct4];
+							var sValidIP = aTestIP.join(".");
+							aValidIPs.push(sValidIP)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	var sResult = "[" + aValidIPs.join(",") + "]";
+	return sResult;
+}
+
+function isValidOctet(test) {
+	if (test > 255) { return false; }
+	if (test == 0) { return true; }
+	if (test.substring(0, 1).localeCompare("0") == 0) { return false; }
+	if (test.length > 3) { return false; }
+
+	return true;
+}
